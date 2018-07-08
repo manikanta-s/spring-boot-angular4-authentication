@@ -10,9 +10,18 @@ body, html {
   background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
 }
 
-.card-container.card {
+.card-container.card.right {
   max-width: 350px;
   padding: 40px 40px;
+  margin-left: 430px;
+  margin-top: 50px;
+}
+
+.card-container.card.left {
+  max-width: 350px;
+  padding: 40px 40px;
+  margin-left: 50px;
+  margin-top: 50px;
 }
 
 .btn {

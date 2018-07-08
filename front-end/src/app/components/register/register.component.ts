@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class RegisterComponent implements OnInit {
   user: User = new User();
-  errorMessage: string;
+  regErrorMessage: string;
 
   constructor(public accountService: AccountService, public router: Router) {
   }
@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/login']);
       }, err => {
         console.log(err);
-        this.errorMessage = "username already exist";
+        this.regErrorMessage = "username already exist";
       }
     )
   }

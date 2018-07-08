@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {User} from "../../model/model.user";
 import {AuthService} from "../../services/auth.service";
+import {AccountService} from "../../services/account.service";
 import {Router} from "@angular/router";
 
 
@@ -13,7 +14,8 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
   user: User=new User();
   errorMessage:string;
-  constructor(private authService :AuthService, private router: Router) { }
+  regErrorMessage:string;
+  constructor(private authService :AuthService, public accountService: AccountService, private router: Router) { }
 
 
 
@@ -28,5 +30,33 @@ export class LoginComponent implements OnInit {
         this.errorMessage="error :  Username or password is incorrect";
         }
       )
+  }
+
+  register() {
+    this.accountService.createAccount(this.user).subscribe(data => {
+        this.login();  
+      // this.router.navigate(['/login']);
+      }, err => {
+        console.log("resgistration error " + err);
+        this.regErrorMessage = "error : username already exist";
+      }
+    )
+  }
+
+  getCountry() {
+    this.accountService.getCountry(this.user).subscribe(data => {
+
+      this.user.state = data.PostOffice[0].State;
+      this.user.country = data.PostOffice[0].Country;
+      // data.PostOffice[0].State
+      // data.PostOffice[0].Country;
+
+    // this.router.navigate(['/login']);
+    }, err => {
+      console.log(err);
+      // this.errorMessage = "username already exist";
+      this.regErrorMessage = "Error while fetchig PIN code data"
+    }
+  )
   }
 }
