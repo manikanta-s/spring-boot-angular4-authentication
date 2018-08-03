@@ -1,0 +1,68 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+  
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="event">Go back to Events</a>
+        </li>
+  
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="#">
+            <span class="glyphicon glyphicon-log-in" (click)="logOut()"></span> LogOut</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="container"> 
+    <h3><strong>{{eventHeader}}</strong></h3>
+
+    <div> <strong>{{eventMessage}}</strong></div>
+<div class="card card-container right">
+    <form name="form" (ngSubmit)="crEv.form.valid && updateEvent()" #crEv="ngForm" novalidate>
+
+        <!-- <div class="alert alert-danger" role="alert" *ngIf="eventMessage">{{eventMessage}}</div> -->
+      <div class="form-group">
+        <label for="username">Update Event</label>
+      </div>
+
+      <div class="form-group" [ngClass]="{ 'has-error': crEv.submitted && !eventName.valid }">
+        <label for="eventName">Event Name</label>
+        <input type="text" class="form-control" name="eventName" id="eventName" [(ngModel)]="event.eventName" #eventName="ngModel"
+          required/>
+        <div *ngIf="crEv.submitted && !eventName.valid" class="help-block">The Event Name is required</div>
+      </div>
+
+      <div class="form-group" [ngClass]="{ 'has-error': crEv.submitted && !date.valid }">
+        <label for="date">Event Date</label>
+        <input type="text" class="form-control" name="date" id="date" [(ngModel)]="event.date" #date="ngModel" required/>
+        <div *ngIf="crEv.submitted && !date.valid" class="help-block">The Event Date is required</div>
+      </div>
+
+
+      <div class="form-group" [ngClass]="{ 'has-error': crEv.submitted && !state.valid }">
+        <label for="state">State</label>
+
+        <select class="form-control" name="state" id="state" [(ngModel)]="event.state" #state="ngModel" required>
+          <option *ngFor="let name of states" value={{name}}>
+            {{name}}
+          </option>
+        </select>
+        <div *ngIf="crEv.submitted && !state.valid" class="help-block">The State is required</div>
+      </div>
+
+      <div class="form-group" [ngClass]="{ 'has-error': crEv.submitted && !location.valid }">
+        <label for="location">Location</label>
+        <input type="text" class="form-control" name="location" id="location" [(ngModel)]="event.location" #location="ngModel" required/>
+        <div *ngIf="crEv.submitted && !location.valid" class="help-block">The Location is required</div>
+      </div>
+
+      <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Update Event</button>
+
+
+    </form>
+
+  </div>
+</div>

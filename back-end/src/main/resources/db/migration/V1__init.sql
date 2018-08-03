@@ -1,0 +1,40 @@
+CREATE TABLE users
+(
+    id SERIAL PRIMARY KEY,
+	username VARCHAR(255) DEFAULT NULL,
+	password VARCHAR(255) DEFAULT NULL,
+    role VARCHAR(100) DEFAULT NULL,
+	full_name VARCHAR(255) DEFAULT NULL,
+	location VARCHAR(100) DEFAULT NULL,
+	state VARCHAR(100) DEFAULT NULL
+);
+
+CREATE TABLE events
+(
+    id SERIAL PRIMARY KEY,
+	event_name VARCHAR(255) DEFAULT NULL,
+	description VARCHAR(1000) DEFAULT NULL,
+    date TIMESTAMP DEFAULT NULL,
+	state VARCHAR(100) DEFAULT NULL,
+	location VARCHAR(100) DEFAULT NULL,
+	posted_by INTEGER REFERENCES users(id),
+	posted_by_name VARCHAR(255) DEFAULT NULL
+);
+
+CREATE TABLE attendees
+(
+    id SERIAL PRIMARY KEY,
+	attending_user INTEGER REFERENCES users(id),
+	attending_event INTEGER REFERENCES events(id),
+	status VARCHAR(100) DEFAULT NULL
+);
+
+
+CREATE TABLE comments
+(
+    id SERIAL PRIMARY KEY,
+	commented_by_id INTEGER REFERENCES users(id),
+	commented_by_user VARCHAR(255) DEFAULT NULL,
+	commented_event_id INTEGER REFERENCES events(id),
+	comment VARCHAR(1000) DEFAULT NULL
+);

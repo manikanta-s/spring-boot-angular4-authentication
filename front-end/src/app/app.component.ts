@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'spring boot and angular 4 secure authentication';
-  static API_URL="http://localhost:8081";
+  static API_URL="https://manikanta-eventbackend.herokuapp.com";
+  // static API_URL="http://localhost:8081";
 }

@@ -1,0 +1,116 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+  
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="event">Go back to Events</a>
+        </li>
+  
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="#">
+            <span class="glyphicon glyphicon-log-in" (click)="logOut()"></span> LogOut</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+ <div class="container"> 
+  <table>
+    <tr>
+      <td>
+  
+  <!-- <div class="container"> -->
+      <h3><strong>{{event.eventName}}</strong></h3>
+        <div class="card card-container left">
+          <div class="row">
+            <label for="eventName">Host : </label>
+            <label id="eventName">{{event.postedBy}}</label>
+          </div>
+          <div class="row">
+              <label for="eventName">Date : </label>
+              <label id="eventName">{{event.date}}</label>
+            </div>
+            <div class="row">
+                <label for="eventName">Location : </label>
+                <label id="eventName">{{event.location}}</label>
+              </div>
+        </div>
+    <!-- </div>   -->
+  <!-- <div class="container"> -->
+        <div class="card card-container left">
+            <!-- <div *ngIf="eventAttendees?.length==0"></div> -->
+            <div *ngIf="eventAttendees?.length==0">
+                <div class="row"> <strong>No Attendees are found for this Event. </strong></div>
+              </div>
+              <div *ngIf="eventAttendees?.length>0">
+                <div class="row"><strong>People who are attending this event : {{eventAttendees?.length}}</strong></div>
+                <div class="row">
+                  <table border="2">
+                    <tr>
+                        <br/> 
+                      <th>Name</th>
+                      <th>Location</th>
+                      <br/>
+                    </tr>
+                    <tr *ngFor="let attendee of eventAttendees">
+                       <br/>
+                          <td>{{attendee.fullName}} </td>
+                          <td> {{attendee.state}} </td>
+                        <br/><br/>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+        </div>
+    <!-- </div> -->
+
+</td>
+<td>
+   <div class="card card-container right">
+            <div class="row"><h4> <strong>Message Wall</strong></h4></div>
+            <div *ngIf="eventComments?.length==0">
+                <div class="row"> <strong>No one commented on this this Event. </strong></div>
+              </div>
+              <div class="row">
+              <table border="3">
+                <tr>
+              <div *ngIf="eventComments?.length>0">
+                <!-- <div class="row"> -->
+
+                    <div class="scrollit">
+
+                  <table>
+                      <tr *ngFor="let comment of eventComments">
+                          <td class="border-bottom" ><b>{{comment.commentedByUser}} : </b>
+                            {{comment.comment}}
+                          </td>
+                          <br/>
+                      </tr>
+                  </table>
+                  </div>
+                <!-- </div> -->
+              </div>
+            </tr>
+            </table>
+            </div>
+        </div>
+
+        <div class="card card-container right">
+        <form name="adCom" (ngSubmit)="adCom.form.valid && commentOnEvent()" #adCom="ngForm" novalidate>
+         <div class="row">
+            <div class="form-group" [ngClass]="{ 'has-error': adCom.submitted && !addComment.valid }">
+                <label for="addComment">Add Comment</label>
+                <input type="text" class="form-control" name="addComment" id="addComment" 
+                [(ngModel)]="currUserComment.comment" #addComment="ngModel" required/>
+                <div *ngIf="adCom.submitted && !addComment.valid" class="help-block">The Comment is required</div>
+            </div>
+          </div>
+
+          <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Submit</button>
+        </form>
+        </div>
+  </td>
+</tr>
+</table>
+</div>

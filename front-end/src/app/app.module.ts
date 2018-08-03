@@ -9,10 +9,14 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from "./services/auth.service";
 import {HttpModule} from "@angular/http";
 import {AccountService} from "./services/account.service";
+import {EventService} from "./services/event.service";
 import { ProfileComponent } from './components/profile/profile.component';
 import {routing} from "./app.routing";
 import {FacebookModule} from "ngx-facebook";
 import {UrlPermission} from "./urlPermission/url.permission";
+import { EventComponent } from './components/event/event.component';
+import { EventDetailsComponent } from './components/event-details/event-details.component';
+import { EventEditComponent } from './components/event-edit/event-edit.component';
 
 
 @NgModule({
@@ -21,13 +25,14 @@ import {UrlPermission} from "./urlPermission/url.permission";
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-
-
+    EventComponent,
+    EventDetailsComponent,
+    EventEditComponent,
   ],
   imports: [
     BrowserModule,HttpModule,FormsModule,routing, FacebookModule.forRoot(),
   ],
-  providers: [AuthService,AccountService,UrlPermission],
+  providers: [AuthService,AccountService,UrlPermission,EventService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

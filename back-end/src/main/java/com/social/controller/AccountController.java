@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.social.services.UserService;
 import com.social.util.CustomErrorType;
@@ -50,6 +51,19 @@ public class AccountController {
 	public Principal user(Principal principal) {
 		logger.info("user logged "+principal);
 		return principal;
+	}
+	
+	@RequestMapping(value="/getPincodeDetails",method=RequestMethod.POST)
+	public ResponseEntity<?>getPicodeDetails(@RequestBody String pincode){
+		String result=null;
+		try{
+			RestTemplate rest=new RestTemplate();
+			result=rest.getForObject("http://postalpincode.in/api/pincode/"+pincode, String.class);
+			logger.info("PIN Code result is : " + result);
+			return new ResponseEntity<String>(result,HttpStatus.OK);
+		}catch(Exception ex){
+			return new ResponseEntity<String>(ex.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	

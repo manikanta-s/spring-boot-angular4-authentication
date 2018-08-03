@@ -15,17 +15,17 @@ export class LoginComponent implements OnInit {
   user: User=new User();
   errorMessage:string;
   regErrorMessage:string;
+  states: Array<any>;
   constructor(private authService :AuthService, public accountService: AccountService, private router: Router) { }
 
-
-
   ngOnInit() {
+    this.states = this.accountService.states;
   }
 
   login(){
     this.authService.logIn(this.user)
       .subscribe(data=>{
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/event']);
         },err=>{
         this.errorMessage="error :  Username or password is incorrect";
         }

@@ -5,6 +5,7 @@ import {AppComponent} from "../app.component";
 
 @Injectable()
 export class AccountService {
+  states: Array<any> = ['Canada' , 'Pittsburgh','Washington' ];
   constructor(public http: Http) { }
 
   createAccount(user:User){
@@ -15,5 +16,9 @@ export class AccountService {
   getCountry(user:User) {
     return this.http.post(AppComponent.API_URL+'/account/getPincodeDetails', user.pinCode)
       .map(resp=>resp.json());
+  }
+
+  getStates() {
+    return this.states;
   }
 }

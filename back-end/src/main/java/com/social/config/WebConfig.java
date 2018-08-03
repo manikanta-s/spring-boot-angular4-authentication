@@ -45,6 +45,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
 	        @Override
 	        public void addCorsMappings(CorsRegistry registry) {
 	            registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+//	            registry.addMapping("/**").allowedOrigins("https://manikanta-eventmanagement.herokuapp.com");
 	          
 	        }
 	    };
@@ -65,9 +66,10 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
 		// starts authorizing configurations
 		.authorizeRequests()
 		// ignoring the guest's urls "
-		.antMatchers("/account/register","/account/login","/logout").permitAll()
+		.antMatchers("/account/register","/account/login","/account/getPincodeDetails","/event/**","/logout").permitAll()
 		// authenticate all remaining URLS
 		.anyRequest().fullyAuthenticated().and()
+//		authenticated().and()
       /* "/logout" will log the user out by invalidating the HTTP Session,
        * cleaning up any {link rememberMe()} authentication that was configured, */
 		.logout()

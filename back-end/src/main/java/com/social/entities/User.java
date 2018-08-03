@@ -9,7 +9,11 @@ package com.social.entities;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,35 +28,27 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
  * 
  * @author kamal berriga
  */
-@Entity
-@Table(name="User")
+@Entity(name = "users")
 @Scope("session")
 public  class User implements UserDetails{
 	public static enum Role{ USER }
-	/**
-	 * Description of the property id.
-	 */
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id ;
-	/**
-	 * Description of the property email.
-	 */
 	@Column(unique = true)
 	private String username ;
-	/**
-	 * Description of the property password.
-	 */
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password ;
-	/**
-	 * Description of the property role , to grant authority to the user .
-	 */
     private String  role;
-    /**
-	 * Description of the property full name.
-	 */
     private String fullName;
+    private String location;
+    private String state;
+    
+ /*   @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="attendees",
+    joinColumns={@JoinColumn(name="attending_user", referencedColumnName="id")},
+    inverseJoinColumns={@JoinColumn(name="attending_event", referencedColumnName="id")})
+    private List<Event> event;*/
 
     public User(){
     	
@@ -138,10 +134,32 @@ public  class User implements UserDetails{
 		this.fullName = fullName;
 	}
 
+	/*public Long getId() {
+		return id;
+	}
+*/
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	public Long getId() {
 		return id;
 	}
-	
-	
+
+	/*public void setId(Long id) {
+		this.id = id;
+	}*/	
 	
 }

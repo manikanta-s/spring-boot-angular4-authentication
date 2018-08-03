@@ -7,7 +7,8 @@
 body, html {
   height: 100%;
   background-repeat: no-repeat;
-  background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+  /* background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33)); */
+  background-image: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
 }
 
 .card-container.card.right {
@@ -117,7 +118,7 @@ body, html {
 
 .btn.btn-signin {
   /*background-color: #4d90fe; */
-  background-color: rgb(104, 145, 162);
+  background-color: rgb(100, 30, 10);
   /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
   padding: 0px;
   font-weight: 700;
